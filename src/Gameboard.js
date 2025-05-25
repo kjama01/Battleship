@@ -1,4 +1,4 @@
-import Ship from "./ship.js";
+import Ship from "./Ship.js";
 
 export default class Gameboard {
   #ships = [];
@@ -11,7 +11,7 @@ export default class Gameboard {
   placeShip(x, y, length) {
     const index = this.#availableShips.indexOf(length);
     if (index === -1) {
-      return;
+      return false;
     }
     this.#availableShips.splice(index, 1);
     const ship = new Ship(length);

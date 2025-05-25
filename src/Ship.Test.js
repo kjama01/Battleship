@@ -1,4 +1,4 @@
-import Ship from "./ship.js";
+import Ship from "./Ship.js";
 
 test("IsSunkLogic", () => {
   const ship = new Ship(2);
