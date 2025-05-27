@@ -13,22 +13,22 @@ export default class Gameboard {
     if (index === -1) {
       return false;
     }
-    this.#availableShips.splice(index, 1);
     const ship = new Ship(length);
     let count = 0;
-    if (y + length > 10) return false;
+    if (x + length > 10 || y >= 10) return false;
     for (let i = 0; i < length; i++) {
-      if (this.#gameboard[x][y + i]) {
+      if (this.#gameboard[x + i][y]) {
         for (let j = 0; j < count; j++) {
-          this.#gameboard[x][y - j] = null;
+          this.#gameboard[x - j][y] = null;
         }
         return false;
       }
       count++;
-      this.#gameboard[x][y + i] = ship;
+      this.#gameboard[x + i][y] = ship;
     }
+    this.#availableShips.splice(index, 1);
     this.#ships.push(ship);
-    return ship;
+    return true;
   }
   receiveAttack(x, y) {
     if (!this.#gameboard[x][y]) {
