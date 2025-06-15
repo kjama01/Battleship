@@ -9,6 +9,9 @@ export default class Player {
   placeShip(x, y, length) {
     return this.#board.placeShip(x, y, length);
   }
+  placeShipHorizontally(x, y, length) {
+    return this.#board.placeShipHorizontal(x, y, length);
+  }
   receiveAttack(x, y) {
     return this.#board.receiveAttack(x, y);
   }
@@ -23,5 +26,20 @@ export default class Player {
   }
   makeMove(x, y, opponent) {
     return opponent.receiveAttack(x, y);
+  }
+  makeRandomMove(opponent) {
+    let x, y, result;
+    do {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+      result = opponent.displayBoard()[x][y];
+    } while (result === "HIT" || result === "MISS");
+
+    return this.makeMove(x, y, opponent);
+  }
+  getAliveShips() {
+    console.log(this.#board); // sprawdź, co zwraca
+    console.log(typeof this.#board.getAliveShips); // powinno być 'function'
+    return this.#board.getAliveShips();
   }
 }

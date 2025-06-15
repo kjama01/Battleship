@@ -30,6 +30,31 @@ export default class Gameboard {
     this.#ships.push(ship);
     return true;
   }
+  placeShipHorizontal(x, y, length) {
+    const index = this.#availableShips.indexOf(length);
+    if (index === -1) {
+      return false;
+    }
+    const ship = new Ship(length);
+    let count = 0;
+
+    if (y + length > 10 || x >= 10) return false;
+
+    for (let i = 0; i < length; i++) {
+      if (this.#gameboard[x][y + i]) {
+        for (let j = 0; j < count; j++) {
+          this.#gameboard[x][y + j] = null;
+        }
+        return false;
+      }
+      count++;
+      this.#gameboard[x][y + i] = ship;
+    }
+
+    this.#availableShips.splice(index, 1);
+    this.#ships.push(ship);
+    return true;
+  }
   receiveAttack(x, y) {
     if (!this.#gameboard[x][y]) {
       this.#miss++;
@@ -52,5 +77,8 @@ export default class Gameboard {
   }
   displayBoard() {
     return this.#gameboard.map((row) => [...row]);
+  }
+  getAliveShips() {
+    return this.#ships.length;
   }
 }
