@@ -5,6 +5,7 @@
     "babel-jest": "^29.7.0",
     "css-loader": "^7.1.2",
     "eslint": "^9.27.0",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^29.7.0",
     "nodemon": "^3.1.10",
